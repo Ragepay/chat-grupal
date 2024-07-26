@@ -1,4 +1,16 @@
 <div>
-    <h1>Hola Bienvenido al ChatGrupal, {{name}}</h1>
+    <h1 id="title">Bienvenidos al Chat Grupal.</h1>
 </div>
-<script src="./js/chatbox.js"></script>
+<div class="container">
+    <div class="chatBox-container">
+        <h2>Chat Grupal</h2>
+        <div class="mensajes" id="mensajes"></div>
+        <input type="text" name="inputMensajes" id="inputMensajes" placeholder="Escribe un mensaje">
+    </div>
+    <div class="userBox-container">
+        <h2>Conectados</h2>
+        <div id="usersON"></div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chatbox.js"></script>
