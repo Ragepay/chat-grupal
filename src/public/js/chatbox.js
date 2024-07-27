@@ -21,12 +21,12 @@ Swal.fire({
         Swal.fire({
             title: 'Nickname ingresado',
             text: user,
-            timer: 500, // Duración en milisegundos
+            timer: 750, // Duración en milisegundos
             showConfirmButton: false // Opcional: oculta el botón de confirmación
         });
         title.innerText = `Bienvenido al Chat Grupal, ${user}!`;
     } else {
-        user = "Anonimo";
+        user = "Anónimo";
     }
     socket.emit('newUser', { user });
 });
@@ -51,16 +51,29 @@ socket.on('conversacion', (data) => {
     chatBox.innerHTML = '';
     data.forEach(element => {
         const div = document.createElement('div');
-        div.innerHTML = `
-        <h4>${element.user}</h4>
-        <p>${element.mensaje}</p>
-        <p class="horario-mensaje"><span>${element.hora}</span>:<span>${element.min}</span></p>`
+        const h4 = document.createElement('h4');
+        const mensaje = document.createElement('p');
+        const hora = document.createElement('p');
+        const horaSpan = document.createElement('span');
+        hora.classList.add('horario-mensaje');
+        const minSpan = document.createElement('span');
+        h4.innerText = element.user == user ? 'Yo' : element.user +': ';
+        mensaje.innerText = element.mensaje;
+        horaSpan.innerText = element.hora + ":";
+        minSpan.innerText = element.min;
+        
+        div.appendChild(h4);
+        div.appendChild(mensaje);
+        hora.appendChild(horaSpan);
+        hora.appendChild(minSpan);
+        div.appendChild(hora);
+
         chatBox.appendChild(div);
     });
-    
+
 });
 
-socket.on('userON', (data)=>{
+socket.on('userON', (data) => {
     const usersON = document.querySelector("#usersON");
     const ul = document.createElement('ul');
     usersON.innerHTML = '';
@@ -68,6 +81,10 @@ socket.on('userON', (data)=>{
         const li = document.createElement('li');
         li.innerHTML = element.user;
         ul.appendChild(li);
-    })
-    usersON.appendChild(ul)
+    });
+    usersON.appendChild(ul);
+});
+
+window.addEventListener('beforeunload', () => {
+    socket.emit('userOff', { user });
 });

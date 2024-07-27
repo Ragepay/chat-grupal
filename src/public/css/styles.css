@@ -1,66 +1,103 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e5ddd5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 h1 {
-    color: red;
+    color: #075E54;
+    text-align: center;
+    margin: 0;
+    padding: 1em;
+    background-color: #075E54;
+    color: white;
+}
+
+h2 {
+    color: #075E54;
+    margin: 0;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ddd;
 }
 
 .container {
-    margin: 1em;
-    padding: 1em;
-    border: 1px solid black;
     display: flex;
-    flex-direction: row; /* Los elementos estarán en fila */
-    justify-content: space-between; /* Espacio entre la caja de mensajes y la lista de usuarios */
-    height: 80vh; /* Altura relativa al viewport */
-    overflow: hidden; /* Evita el desbordamiento */
+    height: calc(100vh - 96px); /* Altura total del viewport menos la altura del header */
+    overflow: hidden;
 }
 
 .chatBox-container {
-    margin: 1em;
-    padding: 1em;
-    border: 1px solid black;
-    max-width: 70%; /* Ancho máximo del 70% del contenedor principal */
-    flex-grow: 1; /* Permite que la caja de chat crezca */
+    flex-grow: 3;
     display: flex;
-    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
-    overflow: hidden; /* Evita el desbordamiento */
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1em;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    overflow: hidden;
 }
 
 .chatBox-container input {
     width: 100%;
     height: 50px;
-    box-sizing: border-box; /* Asegura que el padding y el borde no aumenten el ancho */
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 0 10px;
+    font-size: 16px;
+    margin-top: 1em;
 }
 
 .userBox-container {
-    margin: 1em;
+    flex-grow: 1;
+    background-color: #fff;
     padding: 1em;
-    border: 1px solid black;
-    width: 25%; /* Ancho fijo del 25% del contenedor principal */
-    overflow-y: auto; /* Añade barra de desplazamiento vertical si es necesario */
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+.userBox-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.userBox-container li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .mensajes {
-    flex-grow: 1; /* Permite que los mensajes crezcan para llenar el espacio disponible */
+    flex-grow: 1;
     margin: 1em 0;
     padding: 1em;
-    border: 1px solid black;
-    max-width: 100%;
+    background-color: #e5ddd5;
+    border: none;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Añade barra de desplazamiento vertical si es necesario */
-    
 }
 
 .mensajes div {
-    border: 1px solid grey;
     margin: 0.4em 0;
-    padding: 1em ;
-    border-radius: 5px;
-    word-wrap: break-word; /* Rompe las palabras largas para evitar desbordamiento */
+    padding: 10px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    background-color: #dcf8c6;
+    align-self: flex-start;
+    max-width: 80%;
+}
+
+.mensajes div.yo {
+    background-color: #DCF8C6;
+    align-self: flex-end;
 }
 
 .horario-mensaje {
     display: flex;
     justify-content: flex-end;
     color: grey;
-    font-size: x-small;
+    font-size: 12px;
 }

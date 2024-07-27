@@ -23,7 +23,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/chat', chatRoute);
 
 const conversacion = [];
-const users = [];
+let users = [];
 
 const httpServer = app.listen(PORT, () => {
     console.log("Server ON")
@@ -32,16 +32,21 @@ const io = new Server(httpServer);
 
 io.on('connection', (socket) => {
     console.log("Dispositivos conectados: " + io.engine.clientsCount);
-    socket.on('newUser', (data)=>{
-        console.log(data);
+    socket.on('newUser', (data) => {
         users.push(data);
         io.emit('userON', users);
     });
+
     socket.on('mensaje', (data) => {
         conversacion.push(data);
         io.emit('conversacion', conversacion);
     });
+
+    socket.on('userOff', (data) => {
+        users = users.filter(user => user.user !== data.user);
+        io.emit('userON', users);
+    });
+
     io.emit('conversacion', conversacion);
     io.emit('userON', users);
 });
-
