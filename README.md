@@ -29,3 +29,4 @@ Este proyecto es un chat grupal que utiliza WebSockets para permitir la comunica
 
 ## URL
 
+https://succulent-omniscient-trowel.glitch.me/chat
