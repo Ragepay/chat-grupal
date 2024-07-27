@@ -23,14 +23,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/chat', chatRoute);
 
 const conversacion = [];
-/// Extraer todos los nombres de usuario
-const allUsers = conversacion.map(item => item.user);
-
-// Crear un conjunto para eliminar duplicados
-const uniqueUsers = new Set(allUsers);
-
-// Convertir el conjunto de nuevo a un array
-const usuariosUnicos = Array.from(uniqueUsers);
+const users = [];
 
 const httpServer = app.listen(PORT, () => {
     console.log("Server ON")
@@ -39,13 +32,16 @@ const io = new Server(httpServer);
 
 io.on('connection', (socket) => {
     console.log("Dispositivos conectados: " + io.engine.clientsCount);
-
+    socket.on('newUser', (data)=>{
+        console.log(data);
+        users.push(data);
+        io.emit('userON', users);
+    });
     socket.on('mensaje', (data) => {
         conversacion.push(data);
         io.emit('conversacion', conversacion);
-        io.emit('userON', usuariosUnicos);
     });
     io.emit('conversacion', conversacion);
-    io.emit('userON', usuariosUnicos);
+    io.emit('userON', users);
 });
 

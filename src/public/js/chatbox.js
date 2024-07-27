@@ -31,18 +31,7 @@ Swal.fire({
     socket.emit('newUser', { user });
 });
 
-/*
-// Lista de usuarios en UsersBox.
-const usersBox = document.querySelector("#usersBox");
-io.on("users", (data) => {
-    const ul = document.createElement('ul');
-    data.foreach((user) => {
-        const li = document.createElement('li');
-        li.innerText = user;
-        ul.appendChild(li)
-    })
-})
-    */
+
 const inputChatBox = document.querySelector("#inputMensajes");
 
 inputChatBox.addEventListener('keyup', (event) => {
@@ -74,24 +63,11 @@ socket.on('conversacion', (data) => {
 socket.on('userON', (data)=>{
     const usersON = document.querySelector("#usersON");
     const ul = document.createElement('ul');
-    ul.innerHTML = '';
-    usuariosUnicos.forEach(element => {
+    usersON.innerHTML = '';
+    data.forEach(element => {
         const li = document.createElement('li');
-        li.innerHTML = element;
+        li.innerHTML = element.user;
         ul.appendChild(li);
     })
     usersON.appendChild(ul)
-})
-
-/*
-/// Extraer todos los nombres de usuario
-const allUsers = data.map(item => item.user);
-
-// Crear un conjunto para eliminar duplicados
-const uniqueUsers = new Set(allUsers);
-
-// Convertir el conjunto de nuevo a un array
-const usuariosUnicos = Array.from(uniqueUsers);
-
-
-*/
+});

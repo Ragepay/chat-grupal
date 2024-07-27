@@ -26,7 +26,7 @@ h1 {
 
 .chatBox-container input {
     width: 100%;
-    height: 20px;
+    height: 50px;
     box-sizing: border-box; /* Asegura que el padding y el borde no aumenten el ancho */
 }
 
